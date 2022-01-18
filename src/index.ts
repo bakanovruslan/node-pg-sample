@@ -9,7 +9,6 @@ const client = new Client({
   password: "",
   database: "homework-3",
 });
-client.connect();
 
 const app = express();
 const port = 3000;
@@ -22,7 +21,7 @@ app.get("/user", (req: any, res: any) => {
   const data = req.query;
   console.log(data.login, data.email);
   if (data.login && data.email) {
-
+    client.connect();
     //SQL-query
     const sql = `INSERT INTO customer(email, login) VALUES('${data.email}', '${data.login}')`;
     client.query(sql, (err: any, res: any) => {
